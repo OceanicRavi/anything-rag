@@ -1,0 +1,15 @@
+# RAG-Anything Dependencies
+raganything>=0.1.0
+lightrag-hku>=0.1.0b6
+openai>=1.0.0
+python-dotenv>=1.0.0
+
+# Optional dependencies for enhanced functionality
+Pillow>=10.0.0           # Image processing
+reportlab>=4.0.0         # Text file to PDF conversion
+pandas>=2.0.0            # Data manipulation
+numpy>=1.24.0            # Numerical computing
+
+# Development dependencies (optional)
+jupyter>=1.0.0           # For interactive development
+pytest>=7.0.0            # Testing framework
