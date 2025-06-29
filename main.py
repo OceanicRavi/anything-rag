@@ -19,6 +19,8 @@ async def main():
         print("  python main.py remove all               # Remove all documents")
         print("  python main.py list                     # List processed documents")
         print("  python main.py clean                    # Interactive cleanup")
+        print("  python main.py api [host] [port]        # Start API server")
+        print("  python main.py ui                       # Start Streamlit web interface")
         print("\nExamples:")
         print("  python main.py interactive")
         print("  python main.py query 'What are the main findings?'")
@@ -27,6 +29,9 @@ async def main():
         print("  python main.py remove 'bank statement.pdf'")
         print("  python main.py remove all")
         print("  python main.py list")
+        print("  python main.py api                      # Start API on 127.0.0.1:8000")
+        print("  python main.py api 0.0.0.0 8080         # Start API on all interfaces, port 8080")
+        print("  python main.py ui                       # Start Streamlit interface")
         return
     
     command = sys.argv[1].lower()
@@ -95,6 +100,26 @@ async def main():
             interface = QueryInterface()
             await interface.initialize()
             await interface.clean_knowledge_base()
+        
+        elif command == "api":
+            # Start API server
+            print("🚀 Starting RAG-Anything API Server...")
+            
+            host = sys.argv[2] if len(sys.argv) > 2 else "127.0.0.1"
+            port = int(sys.argv[3]) if len(sys.argv) > 3 else 8000
+            
+            import subprocess
+            subprocess.run([
+                sys.executable, "api_server.py", 
+                "--host", host, 
+                "--port", str(port)
+            ])
+        
+        elif command == "ui" or command == "streamlit":
+            # Start Streamlit interface
+            print("🌟 Starting RAG-Anything Streamlit Interface...")
+            import subprocess
+            subprocess.run([sys.executable, "start_streamlit.py"])
         
         else:
             print(f"❌ Unknown command: {command}")
